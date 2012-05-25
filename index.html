@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<!--[if lt IE 7 ]> <html dir="ltr" lang="en-US" class="ie6"> <![endif]-->
+<!--[if IE 7 ]>    <html dir="ltr" lang="en-US" class="ie7"> <![endif]-->
+<!--[if IE 8 ]>    <html dir="ltr" lang="en-US" class="ie8"> <![endif]-->
+<!--[if IE 9 ]>    <html dir="ltr" lang="en-US" class="ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html dir="ltr" lang="en-US"> <!--<![endif]-->
+
+<head>
+<title>cibi.me animation demo</title>
+<!--  Mobile Viewport Fix -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<!-- Google WebFonts -->
+<link href='http://fonts.googleapis.com/css?family=Dancing+Script:700' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="lib/leaflet-0.3.1/leaflet.css" />
+<link rel="stylesheet" href="style.css" />
+
+<!-- make legacy Internet Explorer play nice(r) -->
+<!--[if lt IE 9]>
+  <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
+<![endif]-->
+</head>
+<body>
+<header id="branding" role="banner" class="clearfix">
+  <hgroup id="logo">
+    <div class="ribbon">
+      <h1 id="site-title"><span><a href="http://cibi.me" title="cibi.me" rel="home">cibi.me</a></span></h1>
+      <h2 id="site-description">Animation Demo</h2>
+    </div>
+  </hgroup>
+</header>
+
+  <div id="map"></div>
+
+  <script src="sample_data.js"></script>
+  <script src="lib/jquery-1.7.2.min.js"></script>
+  <script src="lib/leaflet-0.3.1/leaflet.js"></script>
+  <script src="lib/leaflet.encodedpolyline.js"></script>
+  <script src="lib/AnimatedMarker.js"></script>
+  <script src="config.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>

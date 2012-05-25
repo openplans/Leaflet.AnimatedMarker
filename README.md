@@ -1,0 +1,2 @@
+# CiBi.me Animation Demo #
+This is a simple animated visualization of Cibi.me bikeshare plans. I made a Leaflet plugin called AnimatedMarker to support it. You can see a working example [here](http://openplans.s3.amazonaws.com/cibi_animation/index.html).
