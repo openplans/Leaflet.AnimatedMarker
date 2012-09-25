@@ -66,8 +66,10 @@
     // Nasty global for demo purposes
     $.each(sample_data, function(i, plan){
       setTimeout(function(){
-        plan.data.routerId = 'nyc';
-        callback(plan.data);
+        if (plan && plan.data) {
+          plan.data.routerId = 'nyc';
+          callback(plan.data);
+        }
       }, 5000 * i);
     });
   }
