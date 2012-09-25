@@ -20,7 +20,7 @@
     map.addLayer(overlayTileLayer);
   }
 
-  var url = 'http://cibi-xl2.deployer.opentripplanner.org/opentripplanner-api-webapp/ws/plan';
+  var url = 'http://host-24.deployer.opentripplanner.org/opentripplanner-api-webapp/ws/plan';
   function getPlan(data) {
     $.ajax(url, {
       data: data,
@@ -38,7 +38,7 @@
             polyline = new L.EncodedPolyline(itin.legs[1].legGeometry.points);
           }
 
-          if (polyline._latlngs) {
+          if (polyline && polyline._latlngs) {
             marker = new L.AnimatedMarker(polyline._latlngs, {
               icon: bikeIcon,
               autoStart: false,
@@ -66,6 +66,7 @@
     // Nasty global for demo purposes
     $.each(sample_data, function(i, plan){
       setTimeout(function(){
+        plan.data.routerId = 'nyc';
         callback(plan.data);
       }, 5000 * i);
     });
