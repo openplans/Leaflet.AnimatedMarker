@@ -11,7 +11,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 <!-- Google WebFonts -->
 <link href='http://fonts.googleapis.com/css?family=Dancing+Script:700' rel='stylesheet' type='text/css'>
-<link rel="stylesheet" href="lib/leaflet-0.3.1/leaflet.css" />
+
+<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.4.5/leaflet.css" />
+<!--[if lte IE 8]>
+    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.4.5/leaflet.ie.css" />
+<![endif]-->
+
 <link rel="stylesheet" href="style.css" />
 
 <!-- make legacy Internet Explorer play nice(r) -->
@@ -33,8 +38,8 @@
   <div id="map"></div>
 
   <script src="sample_data.js"></script>
-  <script src="lib/jquery-1.7.2.min.js"></script>
-  <script src="lib/leaflet-0.3.1/leaflet.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+  <script src="http://cdn.leafletjs.com/leaflet-0.4.5/leaflet-src.js"></script>
   <script src="lib/leaflet.encodedpolyline.js"></script>
   <script src="lib/AnimatedMarker.js"></script>
   <script src="config.js"></script>
