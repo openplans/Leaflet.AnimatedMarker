@@ -114,3 +114,7 @@ L.AnimatedMarker = L.Marker.extend({
     }
   }
 });
+
+L.animatedMarker = function (latlngs, options) {
+  return new L.AnimatedMarker(latlngs, options);
+};
