@@ -1,7 +1,7 @@
 L.AnimatedMarker = L.Marker.extend({
   options: {
     // meters
-    maxDistance: 200,
+    distance: 200,
     // ms
     interval: 1000,
     // animate on add?
@@ -16,9 +16,9 @@ L.AnimatedMarker = L.Marker.extend({
       // No need to to check up the line if we can animate using CSS3
       this._latlngs = latlngs;
     } else {
-      // Chunk up the lines into options.maxDistance bits
+      // Chunk up the lines into options.distance bits
       this._latlngs = this._chunk(latlngs);
-      this.options.maxDistance = 10;
+      this.options.distance = 10;
       this.options.interval = 30;
     }
 
@@ -26,7 +26,8 @@ L.AnimatedMarker = L.Marker.extend({
     this._latlngs = this._chunk(latlngs);
   },
 
-  // Breaks the line up into tiny chunks (see options)
+  // Breaks the line up into tiny chunks (see options) ONLY if CSS3 animations
+  // are not supported.
   _chunk: function(latlngs) {
     var i,
         len = latlngs.length,
@@ -36,12 +37,12 @@ L.AnimatedMarker = L.Marker.extend({
       var cur = latlngs[i-1],
           next = latlngs[i],
           dist = cur.distanceTo(next),
-          factor = this.options.maxDistance / dist,
+          factor = this.options.distance / dist,
           dLat = factor * (next.lat - cur.lat),
           dLng = factor * (next.lng - cur.lng);
 
-      if (dist > this.options.maxDistance) {
-        while (dist > this.options.maxDistance) {
+      if (dist > this.options.distance) {
+        while (dist > this.options.distance) {
           cur = new L.LatLng(cur.lat + dLat, cur.lng + dLng);
           dist = cur.distanceTo(next);
           chunkedLatLngs.push(cur);
@@ -70,7 +71,7 @@ L.AnimatedMarker = L.Marker.extend({
 
     // Normalize the transition speed from vertex to vertex
     if (this._i < len) {
-      speed = this._latlngs[this._i-1].distanceTo(this._latlngs[this._i]) / this.options.maxDistance * this.options.interval;
+      speed = this._latlngs[this._i-1].distanceTo(this._latlngs[this._i]) / this.options.distance * this.options.interval;
     }
 
     // Only if CSS3 transitions are supported
