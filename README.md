@@ -1,6 +1,6 @@
 # Leaflet Animated Marker
 
-This is a Leaflet plugin for animating a marker along a polyline. Feedback appreciated!
+This is a Leaflet plugin for animating a marker along a polyline. Check out the [demo](http://openplans.github.com/Leaflet.AnimatedMarker/). Feedback appreciated!
 
 ## How does it work?
 
