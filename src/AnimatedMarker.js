@@ -64,15 +64,19 @@ L.AnimatedMarker = L.Marker.extend({
     }
   },
 
-  animate: function() {
+  animate: function(distance) {
     var self = this,
         len = this._latlngs.length,
         speed = this.options.interval;
 
     // Normalize the transition speed from vertex to vertex
     if (this._i < len) {
+      step_distance = this._latlngs[this._i-1].distanceTo(this._latlngs[this._i]);
       speed = this._latlngs[this._i-1].distanceTo(this._latlngs[this._i]) / this.options.distance * this.options.interval;
     }
+
+    var new_distance = distance + step_distance;
+	  testdist(new_distance);
 
     // Only if CSS3 transitions are supported
     if (L.DomUtil.TRANSITION) {
@@ -89,7 +93,7 @@ L.AnimatedMarker = L.Marker.extend({
       if (self._i === len) {
         self.options.onEnd.apply(self, Array.prototype.slice.call(arguments));
       } else {
-        self.animate();
+        self.animate(new_distance);
       }
     }, speed);
   },
@@ -100,7 +104,7 @@ L.AnimatedMarker = L.Marker.extend({
       this._i = 1;
     }
 
-    this.animate();
+    this.animate(0);
   },
 
   // Stop the animation in place
