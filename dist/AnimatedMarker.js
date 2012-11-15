@@ -27,7 +27,6 @@ L.AnimatedMarker = L.Marker.extend({
     }
 
     L.Marker.prototype.initialize.call(this, latlngs[0], options);
-    this._latlngs = this._chunk(latlngs);
   },
 
   // Breaks the line up into tiny chunks (see options) ONLY if CSS3 animations
