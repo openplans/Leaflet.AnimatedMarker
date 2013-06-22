@@ -12,16 +12,7 @@ L.AnimatedMarker = L.Marker.extend({
   },
 
   initialize: function (latlngs, options) {
-    if (L.DomUtil.TRANSITION) {
-      // No need to to check up the line if we can animate using CSS3
-      this._latlngs = latlngs;
-    } else {
-      // Chunk up the lines into options.distance bits
-      this._latlngs = this._chunk(latlngs);
-      this.options.distance = 10;
-      this.options.interval = 30;
-    }
-
+    this.setLine(latlngs);
     L.Marker.prototype.initialize.call(this, latlngs[0], options);
   },
 
@@ -83,7 +74,7 @@ L.AnimatedMarker = L.Marker.extend({
     this.setLatLng(this._latlngs[this._i]);
     this._i++;
 
-    // Queue up the animation ot the next next vertex
+    // Queue up the animation to the next next vertex
     this._tid = setTimeout(function(){
       if (self._i === len) {
         self.options.onEnd.apply(self, Array.prototype.slice.call(arguments));
@@ -107,7 +98,20 @@ L.AnimatedMarker = L.Marker.extend({
     if (this._tid) {
       clearTimeout(this._tid);
     }
+  },
+
+  setLine: function(latlngs){
+    if (L.DomUtil.TRANSITION) {
+      // No need to to check up the line if we can animate using CSS3
+      this._latlngs = latlngs;
+    } else {
+      // Chunk up the lines into options.distance bits
+      this._latlngs = this._chunk(latlngs);
+      this.options.distance = 10;
+      this.options.interval = 30;
+    }
   }
+
 });
 
 L.animatedMarker = function (latlngs, options) {
