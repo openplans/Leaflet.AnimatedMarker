@@ -93,6 +93,11 @@ L.AnimatedMarker = L.Marker.extend({
     this.animate();
   },
 
+  // Reset the animation ot the beginning
+  reset: function() {
+    this._i = 0;
+  },
+
   // Stop the animation in place
   stop: function() {
     if (this._tid) {
