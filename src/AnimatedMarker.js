@@ -90,21 +90,18 @@ L.AnimatedMarker = L.Marker.extend({
         speed = this.options.interval;
 
     // Normalize the transition speed from vertex to vertex
-    if (this._i < len && this._i + 1 < len) {
+    if (this._i < len) {
       speed = this._latlngs[this._i-1].distanceTo(this._latlngs[this._i]) / this.options.distance * this.options.interval;
     }
 
     this.enableTransitions(speed);
 
     // Move to the next vertex
-    if (this._i < len) {
-      this.setLatLng(this._latlngs[this._i]);
-      this._i++;
-    }
-
+    this.setLatLng(this._latlngs[this._i]);
+    
     // Queue up the animation to the next next vertex
     this._tid = setTimeout(function(){
-      if (self._i === len) {
+      if (self._i >= len) {
         self.options.onEnd.apply(self, Array.prototype.slice.call(arguments));
       } else {
         self.animate();
@@ -115,7 +112,7 @@ L.AnimatedMarker = L.Marker.extend({
   // Start the animation
   start: function() {
     if (!this._i) {
-      this._i = 0;
+      this._i = 1;
     }
 
     this.animate();
