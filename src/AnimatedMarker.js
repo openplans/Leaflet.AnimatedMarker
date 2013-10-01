@@ -96,6 +96,8 @@ L.AnimatedMarker = L.Marker.extend({
   // Reset the animation ot the beginning
   reset: function() {
     this._i = 0;
+    //move back to the first location
+    this.setLatLng(this._latlngs[0]);
   },
 
   // Stop the animation in place
