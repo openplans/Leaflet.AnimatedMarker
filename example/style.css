@@ -8,6 +8,13 @@
 
 body { margin: 0; }
 
+#start {
+  position: absolute;
+  right: 30px;
+  bottom: 30px;
+  font-size: 40px
+}
+
 /* All of this is from cibi.me */
 
 #branding {
