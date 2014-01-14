@@ -41,6 +41,7 @@ L.AnimatedMarker = L.Marker.extend({
         chunkedLatLngs.push(cur);
       }
     }
+    chunkedLatLngs.push(latlngs[len-1]);
 
     return chunkedLatLngs;
   },
