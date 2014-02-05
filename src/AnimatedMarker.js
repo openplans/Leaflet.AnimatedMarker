@@ -87,10 +87,6 @@ L.AnimatedMarker = L.Marker.extend({
 
   // Start the animation
   start: function() {
-    if (!this._i) {
-      this._i = 1;
-    }
-
     this.animate();
   },
 
@@ -111,6 +107,7 @@ L.AnimatedMarker = L.Marker.extend({
       this.options.distance = 10;
       this.options.interval = 30;
     }
+    this._i = 1;
   }
 
 });
