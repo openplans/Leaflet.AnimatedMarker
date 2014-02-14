@@ -8,7 +8,7 @@ It uses CSS3 animations to move the marker from point to point at a specific rat
 
 ## How can I use it?
 
-The following code will an AnimatedMarker that moves along `line`, assuming a `Leaflet.Map` called `map`.
+The following code will create an AnimatedMarker that moves along `line`, assuming a `Leaflet.Map` called `map`.
 
     var line = L.polyline([[40.68510, -73.94136],[40.68576, -73.94149],[40.68649, -73.94165]]),
         animatedMarker = L.animatedMarker(line.getLatLngs());
