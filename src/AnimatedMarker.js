@@ -108,6 +108,12 @@ L.AnimatedMarker = L.Marker.extend({
       this.options.interval = 30;
     }
     this._i = 1;
+  },
+
+  addLatLng: function(latlng) {
+    this._latlngs.push(latlng);
+    this.stop();
+    this.start();
   }
 
 });
