@@ -26,7 +26,7 @@ L.AnimatedMarker = L.Marker.extend({
     for (i=1;i<len;i++) {
       var cur = latlngs[i-1],
           next = latlngs[i],
-          dist = cur.distanceTo(next),
+          dist = this._distance(cur, next),
           factor = this.options.distance / dist,
           dLat = factor * (next.lat - cur.lat),
           dLng = factor * (next.lng - cur.lng);
@@ -34,7 +34,7 @@ L.AnimatedMarker = L.Marker.extend({
       if (dist > this.options.distance) {
         while (dist > this.options.distance) {
           cur = new L.LatLng(cur.lat + dLat, cur.lng + dLng);
-          dist = cur.distanceTo(next);
+          dist = this._distance(cur, next);
           chunkedLatLngs.push(cur);
         }
       } else {
@@ -48,6 +48,7 @@ L.AnimatedMarker = L.Marker.extend({
 
   onAdd: function (map) {
     L.Marker.prototype.onAdd.call(this, map);
+    this._map = map;
 
     // Start animating when added to the map
     if (this.options.autoStart) {
@@ -62,7 +63,7 @@ L.AnimatedMarker = L.Marker.extend({
 
     // Normalize the transition speed from vertex to vertex
     if (this._i < len) {
-      speed = this._latlngs[this._i-1].distanceTo(this._latlngs[this._i]) / this.options.distance * this.options.interval;
+      speed = this._distance(this._latlngs[this._i-1], this._latlngs[this._i]) / this.options.distance * this.options.interval;
     }
 
     // Only if CSS3 transitions are supported
@@ -108,6 +109,14 @@ L.AnimatedMarker = L.Marker.extend({
       this.options.interval = 30;
     }
     this._i = 1;
+  },
+
+  _distance: function(cur, next) {
+    if (this._map.options.crs.distance) {
+      return this._map.options.crs.distance(cur, next);
+    } else {
+      return cur.distanceTo(next);
+    }
   }
 
 });
