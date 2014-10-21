@@ -79,6 +79,8 @@ L.AnimatedMarker = L.Marker.extend({
     // Queue up the animation to the next next vertex
     this._tid = setTimeout(function(){
       if (self._i === len) {
+        if (self._icon) { self._icon.style[L.DomUtil.TRANSITION] = ''; }
+        if (self._shadow) { self._shadow.style[L.DomUtil.TRANSITION] = ''; }
         self.options.onEnd.apply(self, Array.prototype.slice.call(arguments));
       } else {
         self.animate();
