@@ -1,4 +1,5 @@
 L.AnimatedMarker = L.Marker.extend({
+  includes: L.Mixin.Events,
   options: {
     // meters
     distance: 200,
@@ -6,8 +7,6 @@ L.AnimatedMarker = L.Marker.extend({
     interval: 1000,
     // animate on add?
     autoStart: true,
-    // callback onend
-    onEnd: function(){},
     clickable: false
   },
 
@@ -81,7 +80,7 @@ L.AnimatedMarker = L.Marker.extend({
       if (self._i === len) {
         if (self._icon) { self._icon.style[L.DomUtil.TRANSITION] = ''; }
         if (self._shadow) { self._shadow.style[L.DomUtil.TRANSITION] = ''; }
-        self.options.onEnd.apply(self, Array.prototype.slice.call(arguments));
+        self.fire('animationend');
       } else {
         self.animate();
       }
