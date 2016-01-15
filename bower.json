@@ -1,0 +1,23 @@
+{
+  "name": "leaflet.AnimatedMarker",
+  "description": "A Leaflet plugin to animate a Marker along a polyline",
+  "main": [
+    "AnimatedMarker.js"
+    ],
+  "dependencies": {
+    "leaflet": "~0.7.2"
+  },
+  "devDependencies": {
+  },
+  "authors": [
+    "openplans"
+  ],
+  "ignore": [
+    "example",
+    "**/*.txt",
+    "README",
+    "package.json",
+    ".gitignore",
+    "bower.json"
+  ]
+}
