@@ -59,3 +59,15 @@ Sure! Just use the `onEnd` callback.
         // TODO: blow up this marker
       }
     });
+    
+## Install via NPM
+
+```
+npm install -S leaflet.animatedmarker
+```
+
+### Inclusion via npm
+
+```
+require('leaflet.animatedmarker/src/AnimatedMarker');
+```
