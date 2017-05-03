@@ -49,15 +49,45 @@ L.AnimatedMarker = L.Marker.extend({
   onAdd: function (map) {
     L.Marker.prototype.onAdd.call(this, map);
 
+    var self = this;
+
+    map.on('zoomstart', function() {
+      self._zooming = true;
+      self.disableTransitions();
+    });
+    map.on('zoomend', function() {
+      self.enableTransitions();
+      self._zooming = false;
+    });
     // Start animating when added to the map
     if (this.options.autoStart) {
       this.start();
     }
   },
 
+  setTransition: function(element, transition) {
+    if (element) {
+      element.style[L.DomUtil.TRANSITION] = transition;
+    }
+  },
+
+  enableTransitions: function(speed) {
+    // Only if CSS3 transitions are supported
+    if (!this._zooming && L.DomUtil.TRANSITION) {
+      var transition = 'all ' + (speed || this.options.interval) + 'ms linear';
+      this.setTransition(this._icon, transition);
+      this.setTransition(this._shadow, transition);
+    }
+  },
+
+  disableTransitions: function() {
+    this.setTransition(this._icon, '');
+    this.setTransition(this._shadow, '');
+  },
+
   animate: function() {
-    var self = this,
-        len = this._latlngs.length,
+    var self  = this,
+        len   = this._latlngs.length,
         speed = this.options.interval;
 
     // Normalize the transition speed from vertex to vertex
@@ -65,19 +95,14 @@ L.AnimatedMarker = L.Marker.extend({
       speed = this._latlngs[this._i-1].distanceTo(this._latlngs[this._i]) / this.options.distance * this.options.interval;
     }
 
-    // Only if CSS3 transitions are supported
-    if (L.DomUtil.TRANSITION) {
-      if (this._icon) { this._icon.style[L.DomUtil.TRANSITION] = ('all ' + speed + 'ms linear'); }
-      if (this._shadow) { this._shadow.style[L.DomUtil.TRANSITION] = 'all ' + speed + 'ms linear'; }
-    }
+    this.enableTransitions(speed);
 
     // Move to the next vertex
     this.setLatLng(this._latlngs[this._i]);
-    this._i++;
-
+    
     // Queue up the animation to the next next vertex
     this._tid = setTimeout(function(){
-      if (self._i === len) {
+      if (self._i >= len) {
         self.options.onEnd.apply(self, Array.prototype.slice.call(arguments));
       } else {
         self.animate();
@@ -88,6 +113,13 @@ L.AnimatedMarker = L.Marker.extend({
   // Start the animation
   start: function() {
     this.animate();
+  },
+
+  // Reset the animation ot the beginning
+  reset: function() {
+    this._i = 0;
+    //move back to the first location
+    this.setLatLng(this._latlngs[0]);
   },
 
   // Stop the animation in place
