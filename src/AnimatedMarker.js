@@ -56,6 +56,24 @@ L.AnimatedMarker = L.Marker.extend({
   },
 
   animate: function() {
+    this.animateLine();
+
+    // Queue up the animation to the next next vertex
+    this._tid = setTimeout(function(){
+      if (self._i === len) {
+        self.options.onEnd.apply(self, Array.prototype.slice.call(arguments));
+      } else {
+        self.animate();
+      }
+    }, speed);
+  },
+
+  // Start the animation
+  start: function() {
+    this.animate();
+  },
+
+  animateLine: function() {
     var self = this,
         len = this._latlngs.length,
         speed = this.options.interval;
@@ -74,20 +92,11 @@ L.AnimatedMarker = L.Marker.extend({
     // Move to the next vertex
     this.setLatLng(this._latlngs[this._i]);
     this._i++;
-
-    // Queue up the animation to the next next vertex
-    this._tid = setTimeout(function(){
-      if (self._i === len) {
-        self.options.onEnd.apply(self, Array.prototype.slice.call(arguments));
-      } else {
-        self.animate();
-      }
-    }, speed);
   },
 
-  // Start the animation
-  start: function() {
-    this.animate();
+  startAnimateLine: function(index) {
+    this._i = index;
+    this.animateLine();
   },
 
   // Stop the animation in place
