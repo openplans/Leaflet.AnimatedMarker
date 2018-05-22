@@ -75,8 +75,8 @@ L.AnimatedMarker = L.Marker.extend({
 
   animateLine: function() {
     var self = this,
-      len = this._latlngs.length,
-      speed = this.options.interval;
+        len = this._latlngs.length,
+        speed = this.options.interval;
 
     // Normalize the transition speed from vertex to vertex
     if (this._i < len && this._i > 0) {
