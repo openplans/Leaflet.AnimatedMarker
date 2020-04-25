@@ -55,7 +55,7 @@ L.AnimatedMarker = L.Marker.extend({
     }
   },
 
-  animate: function() {
+  animate: function(start) {
     var self = this,
         len = this._latlngs.length,
         speed = this.options.interval;
@@ -82,12 +82,12 @@ L.AnimatedMarker = L.Marker.extend({
       } else {
         self.animate();
       }
-    }, speed);
+    }, start ? 0 : speed);
   },
 
   // Start the animation
   start: function() {
-    this.animate();
+    this.animate(true);
   },
 
   // Stop the animation in place
