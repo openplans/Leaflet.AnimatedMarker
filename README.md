@@ -1,7 +1,7 @@
 # Leaflet Animated Marker
 [![CDNJS](https://img.shields.io/cdnjs/v/leaflet.AnimatedMarker.svg)](https://cdnjs.com/libraries/leaflet.AnimatedMarker)
 
-This is a Leaflet plugin for animating a marker along a polyline. Check out the [demo](http://openplans.github.com/Leaflet.AnimatedMarker/). Feedback appreciated!
+This is a Leaflet plugin for animating a marker along a polyline. Check out the [demo](http://openplans.github.io/Leaflet.AnimatedMarker/). Feedback appreciated!
 
 ## How does it work?
 
