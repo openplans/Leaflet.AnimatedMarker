@@ -12,7 +12,8 @@ body { margin: 0; }
   position: absolute;
   right: 30px;
   bottom: 30px;
-  font-size: 40px
+  font-size: 40px;
+  z-index: 1000;
 }
 
 /* All of this is from cibi.me */
@@ -21,7 +22,7 @@ body { margin: 0; }
   height: 0;
   overflow: visible;
   position: relative;
-  z-index: 100;
+  z-index: 1000;
   color: #fff;
 
   background-color: #444;
