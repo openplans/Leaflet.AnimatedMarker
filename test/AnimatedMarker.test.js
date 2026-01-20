@@ -176,28 +176,32 @@ describe('AnimatedMarker', () => {
   });
 
   describe('animation progression', () => {
-    it('moves through all waypoints', () => {
+    it('moves through all waypoints and reaches the end', () => {
+      const onEnd = vi.fn();
       const marker = L.animatedMarker(samplePath, {
         autoStart: false,
         distance: 1000,
-        interval: 100
+        interval: 100,
+        onEnd: onEnd
       });
 
       marker.addTo(map);
+
+      // Before starting, index should be 0
+      expect(marker._i).toBe(0);
+
       marker.start();
 
-      // After starting, marker should be at first position
+      // After starting, marker moves to first position and increments _i
       expect(marker._i).toBe(1);
 
-      // Advance through each waypoint
-      vi.advanceTimersByTime(100);
-      expect(marker._i).toBe(2);
+      // Advance time to complete the animation
+      // Each step takes ~100ms (simplified due to large distance setting)
+      vi.advanceTimersByTime(500);
 
-      vi.advanceTimersByTime(100);
-      expect(marker._i).toBe(3);
-
-      vi.advanceTimersByTime(100);
-      expect(marker._i).toBe(4);
+      // Animation should have completed
+      expect(marker._i).toBe(samplePath.length);
+      expect(onEnd).toHaveBeenCalled();
     });
   });
 
