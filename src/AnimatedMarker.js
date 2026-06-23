@@ -118,10 +118,10 @@
 
     _disableTransition: function () {
       if (this._icon) {
-        this._icon.style.transition = 'none';
+        this._icon.style.transition = '';
       }
       if (this._shadow) {
-        this._shadow.style.transition = 'none';
+        this._shadow.style.transition = '';
       }
     },
 

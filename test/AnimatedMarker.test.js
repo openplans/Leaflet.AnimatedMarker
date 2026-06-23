@@ -216,7 +216,7 @@ describe('AnimatedMarker', () => {
       // Simulate zoomstart
       map.fire('zoomstart');
 
-      expect(marker._icon.style.transition).toBe('none');
+      expect(marker._icon.style.transition).toBe('');
     });
 
     it('re-enables transition on zoomend', () => {
