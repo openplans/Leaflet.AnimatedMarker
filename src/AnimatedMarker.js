@@ -63,7 +63,7 @@
 
     animate: function () {
       const len = this._latlngs.length;
-      let speed = this.options.interval;
+      let speed = 0;
 
       // Normalize the transition speed from vertex to vertex
       if (this._i < len && this._i > 0) {
